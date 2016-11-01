@@ -13,7 +13,7 @@
         android:src="@drawable/icon_logo" />
     <Button
     android:id="@+id/btnLogin"
-    android:layout_width="160dp"
+    android:layout_width="170dp"
     android:layout_height="wrap_content"
     android:background="#4AA747"
     android:onClick="login"
@@ -24,7 +24,7 @@
         android:layout_marginTop="340dp"/>
     <Button
         android:id="@+id/btnRegister"
-        android:layout_width="160dp"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnLogin"
         android:layout_marginTop="20dp"
