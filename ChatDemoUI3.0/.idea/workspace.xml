@@ -27,23 +27,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3622fb7f-978f-49cb-929e-662cf00faf5c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/libs/gson-2.7.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/libs/okhttp-3.2.0.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/libs/okio-1.9.0.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/gson_2_7.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/okhttp_3_2_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/okio_1_9_0.xml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/cn/ucai/superwechat/I.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/cn/ucai/superwechat/bean/Result.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/cn/ucai/superwechat/utils/MD5.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/cn/ucai/superwechat/utils/ResultUtils.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/redpacketlibrary/redpacketlibrary.iml" afterPath="$PROJECT_DIR$/redpacketlibrary/redpacketlibrary.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cn/ucai/superwechat/ui/GuideActivity.java" afterPath="$PROJECT_DIR$/src/cn/ucai/superwechat/ui/GuideActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cn/ucai/superwechat/ui/SplashActivity.java" afterPath="$PROJECT_DIR$/src/cn/ucai/superwechat/ui/SplashActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cn/ucai/superwechat/utils/MFGT.java" afterPath="$PROJECT_DIR$/src/cn/ucai/superwechat/utils/MFGT.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../easeui/EaseUI.iml" afterPath="$PROJECT_DIR$/../easeui/EaseUI.iml" />
     </list>
     <ignored path="ChatDemoUI3.0.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -3061,7 +3046,13 @@
       <option name="project" value="LOCAL" />
       <updated>1477978463982</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="添加MD5，result及其工具类，okhttp和gson的依赖">
+      <created>1477984392923</created>
+      <option name="number" value="00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1477984392924</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -3115,7 +3106,8 @@
     <MESSAGE value="修改闪屏界面" />
     <MESSAGE value="添加欢迎界面" />
     <MESSAGE value="添加MFGT工具类，里面新建跳转到登录界面和注册界面的方法" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加MFGT工具类，里面新建跳转到登录界面和注册界面的方法" />
+    <MESSAGE value="添加MD5，result及其工具类，okhttp和gson的依赖" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加MD5，result及其工具类，okhttp和gson的依赖" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
