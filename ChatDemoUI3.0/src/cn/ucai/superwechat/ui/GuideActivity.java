@@ -7,6 +7,7 @@ import android.view.View;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.ucai.superwechat.R;
+import cn.ucai.superwechat.utils.MFGT;
 
 public class GuideActivity extends AppCompatActivity {
 
@@ -21,10 +22,10 @@ public class GuideActivity extends AppCompatActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnLogin:
-
+                MFGT.gotoLoginActivity(this);
                 break;
             case R.id.btnRegister:
-
+                MFGT.gotoRegisterActivity(this);
                 break;
         }
     }

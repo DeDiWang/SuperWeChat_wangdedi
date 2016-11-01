@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="cn.ucai.superwechat"
     android:versionCode="36"
-    android:versionName="3.1.4">
+    android:versionName="3.1.4"
+    >
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -53,7 +54,8 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:theme="@style/AppTheme"
-        android:label="超级微信">
+        android:label="超级微信"
+        >
         <activity
             android:name=".ui.MainActivity"
             android:launchMode="singleTask"
@@ -65,7 +67,7 @@
         <activity
             android:name=".ui.SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/horizontal_slide">
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -436,7 +438,7 @@
         <!-- 设置环信应用的appkey -->
         <meta-data
             android:name="EASEMOB_APPKEY"
-            android:value="easemob-demo#chatdemoui" />
+            android:value="i#superwechat201607" />
         <!-- 声明sdk所需的service -->
         <service
             android:name="com.hyphenate.chat.EMChatService"

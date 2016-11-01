@@ -1,14 +1,10 @@
 package cn.ucai.superwechat.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.animation.AlphaAnimation;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-
 import com.hyphenate.chat.EMClient;
 import cn.ucai.superwechat.DemoHelper;
 import cn.ucai.superwechat.R;
+import cn.ucai.superwechat.utils.MFGT;
 
 /**
  * 开屏页
@@ -45,21 +41,19 @@ public class SplashActivity extends BaseActivity {
 						}
 					}
 					//enter main screen
-					startActivity(new Intent(SplashActivity.this, MainActivity.class));
-					finish();
-				}else {
+					MFGT.gotoMainActivity(SplashActivity.this);
+					MFGT.finish(SplashActivity.this);
+				} else {
 					try {
 						Thread.sleep(sleepTime);
 					} catch (InterruptedException e) {
 					}
-					startActivity(new Intent(SplashActivity.this, GuideActivity.class));
-					finish();
+					MFGT.gotoGuideActivity(SplashActivity.this);
+					MFGT.finish(SplashActivity.this);
 				}
 			}
 		}).start();
-
 	}
-	
 	/**
 	 * get sdk version
 	 */
