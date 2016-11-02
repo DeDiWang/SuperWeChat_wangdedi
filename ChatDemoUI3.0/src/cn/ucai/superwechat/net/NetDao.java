@@ -1,4 +1,4 @@
-package cn.ucai.net;
+package cn.ucai.superwechat.net;
 
 import android.app.Activity;
 import android.content.Context;
