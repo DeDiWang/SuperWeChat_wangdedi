@@ -183,7 +183,9 @@ public class LoginActivity extends BaseActivity {
                             UserDao dao=new UserDao(LoginActivity.this);
                             boolean isSuccess = dao.saveUser(user);
                             L.e(TAG,"保存用户信息到数据库"+isSuccess);
-
+                            //登录成功后将用户信息保存在内存中
+                            SuperWeChatHelper.getInstance().setCurrentUser(user);
+                            L.e(TAG,"currentUser="+SuperWeChatHelper.getInstance().getCurrentUser());
                             afterLoginSuccess();
                         }
                     }
