@@ -9,7 +9,7 @@ import butterknife.OnClick;
 import cn.ucai.superwechat.R;
 import cn.ucai.superwechat.utils.MFGT;
 
-public class GuideActivity extends AppCompatActivity {
+public class GuideActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

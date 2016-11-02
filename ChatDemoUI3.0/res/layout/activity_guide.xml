@@ -21,7 +21,7 @@
     android:textColor="@android:color/white"
     android:textSize="18sp"
     android:layout_centerHorizontal="true"
-        android:layout_marginTop="340dp"/>
+    android:layout_marginTop="340dp"/>
     <Button
         android:id="@+id/btnRegister"
         android:layout_width="170dp"

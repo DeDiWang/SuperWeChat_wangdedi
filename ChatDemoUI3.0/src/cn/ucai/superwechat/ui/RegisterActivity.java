@@ -23,6 +23,7 @@ import cn.ucai.superwechat.SuperWeChatHelper;
 import cn.ucai.superwechat.bean.Result;
 import cn.ucai.superwechat.data.OkHttpUtils;
 import cn.ucai.superwechat.utils.CommonUtils;
+import cn.ucai.superwechat.utils.MD5;
 import cn.ucai.superwechat.utils.MFGT;
 
 /**
@@ -45,8 +46,14 @@ public class RegisterActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.em_activity_register);
         ButterKnife.bind(this);
+        initView();
         mContext=this;
     }
+
+    private void initView() {
+        ivBack.setVisibility(View.VISIBLE);
+    }
+
     String username,nick,pwd,confirm_pwd;
     ProgressDialog pd;
 
@@ -130,7 +137,7 @@ public class RegisterActivity extends BaseActivity {
             public void run() {
                 try {
                     // call method in SDK
-                    EMClient.getInstance().createAccount(username, pwd);
+                    EMClient.getInstance().createAccount(username, MD5.getMessageDigest(pwd));
                     runOnUiThread(new Runnable() {
                         public void run() {
                             if (!RegisterActivity.this.isFinishing())

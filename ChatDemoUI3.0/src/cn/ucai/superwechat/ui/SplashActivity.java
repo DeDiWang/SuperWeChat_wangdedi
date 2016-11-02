@@ -1,5 +1,6 @@
 package cn.ucai.superwechat.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import com.hyphenate.chat.EMClient;
 import cn.ucai.superwechat.SuperWeChatHelper;
@@ -48,7 +49,7 @@ public class SplashActivity extends BaseActivity {
 						Thread.sleep(sleepTime);
 					} catch (InterruptedException e) {
 					}
-					MFGT.gotoGuideActivity(SplashActivity.this);
+					startActivity(new Intent(SplashActivity.this,GuideActivity.class));
 					MFGT.finish(SplashActivity.this);
 				}
 			}
