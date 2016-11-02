@@ -16,11 +16,14 @@ import android.widget.Toast;
 
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.easeui.domain.User;
 import com.hyphenate.easeui.utils.EaseCommonUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.ucai.superwechat.bean.Result;
+import cn.ucai.superwechat.db.UserDao;
 import cn.ucai.superwechat.net.NetDao;
 import cn.ucai.superwechat.R;
 import cn.ucai.superwechat.SuperWeChatApplication;
@@ -30,6 +33,7 @@ import cn.ucai.superwechat.db.SuperWeChatManager;
 import cn.ucai.superwechat.utils.L;
 import cn.ucai.superwechat.utils.MD5;
 import cn.ucai.superwechat.utils.MFGT;
+import cn.ucai.superwechat.utils.ResultUtils;
 
 /**
  * Login screen
@@ -170,7 +174,20 @@ public class LoginActivity extends BaseActivity {
             public void onSuccess(String s) {
                 L.e(TAG,"s="+s);
                 pd.dismiss();
-                afterLoginSuccess();
+                if(s!=null && s!=""){
+                    Result result = ResultUtils.getResultFromJson(s, User.class);
+                    if(result!=null && result.isRetMsg()){
+                        User user = (User) result.getRetData();
+                        if(user!=null){
+                            //登录成功后在数据库中保存用户信息
+                            UserDao dao=new UserDao(LoginActivity.this);
+                            boolean isSuccess = dao.saveUser(user);
+                            L.e(TAG,"保存用户信息到数据库"+isSuccess);
+
+                            afterLoginSuccess();
+                        }
+                    }
+                }
             }
 
             @Override
