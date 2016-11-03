@@ -479,7 +479,6 @@ public class SuperWeChatManager {
                 user.setMAvatarSuffix(c.getString(c.getColumnIndex(UserDao.USER_COLUMN_AVATAR_SUFFIX)));
                 user.setMAvatarLastUpdateTime(c.getString(c.getColumnIndex(UserDao.USER_COLUMN_AVATAR_LASTUPDATE_TIME)));
                 user.setMAvatarType(c.getInt(c.getColumnIndex(UserDao.USER_COLUMN_AVATAR_TYPE)));
-
                 EaseCommonUtils.setAppUserInitialLetter(user);
                 users.put(username,user);
             }
