@@ -3,6 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:background="@color/colorPrimary">
+    <TextView
+        android:id="@+id/tvLeft"
+        android:text="微信"
+        android:textSize="20dp"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
     <ImageView
         android:id="@+id/iv_back"
         android:layout_width="wrap_content"
@@ -28,4 +38,12 @@
         android:text="添加朋友"
         android:visibility="gone"
         android:textColor="@color/white"/>
+    <ImageView
+        android:id="@+id/ivAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/em_add"
+        android:visibility="gone"
+        android:layout_marginRight="10dp"/>
 </RelativeLayout>
