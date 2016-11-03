@@ -127,6 +127,10 @@ public class LoginActivity extends BaseActivity {
         pd.setMessage(getString(R.string.Is_landing));
         pd.show();
 
+        logEmServer();
+    }
+
+    private void logEmServer() {
         // After logout，the DemoDB may still be accessed due to async callback, so the DemoDB will be re-opened again.
         // close it before login to make sure DemoDB not overlap
         SuperWeChatManager.getInstance().closeDB();

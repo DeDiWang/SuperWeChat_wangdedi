@@ -1,8 +1,6 @@
 package cn.ucai.superwechat.ui;
 
 import android.content.Context;
-import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.easeui.domain.User;
@@ -17,15 +15,15 @@ import cn.ucai.superwechat.utils.MFGT;
  * 开屏页
  *
  */
-public class SplashActivity extends BaseActivity {
-	private static final String TAG=SplashActivity.class.getSimpleName();
+public class SplashActivitys extends BaseActivity {
+	private static final String TAG=SplashActivitys.class.getSimpleName();
 	private static final int sleepTime = 2000;
 	Context context;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		setContentView(R.layout.em_activity_splash);
 		super.onCreate(arg0);
-		context=SplashActivity.this;
+		context=SplashActivitys.this;
 	}
 
 	@Override
@@ -56,15 +54,15 @@ public class SplashActivity extends BaseActivity {
 						}
 					}
 					//enter main screen
-					MFGT.gotoMainActivity(SplashActivity.this);
-					MFGT.finish(SplashActivity.this);
+					MFGT.gotoMainActivity(SplashActivitys.this);
+					MFGT.finish(SplashActivitys.this);
 				} else {
 					try {
 						Thread.sleep(sleepTime);
 					} catch (InterruptedException e) {
 					}
-					MFGT.gotoGuideActivity(SplashActivity.this);
-					MFGT.finish(SplashActivity.this);
+					MFGT.gotoGuideActivity(SplashActivitys.this);
+					MFGT.finish(SplashActivitys.this);
 				}
 			}
 		}).start();
