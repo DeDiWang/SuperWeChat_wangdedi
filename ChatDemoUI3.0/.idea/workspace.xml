@@ -39,11 +39,6 @@
   <component name="ChangeListManager">
     <list default="true" id="3622fb7f-978f-49cb-929e-662cf00faf5c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cn/ucai/superwechat/SuperWeChatHelper.java" afterPath="$PROJECT_DIR$/src/cn/ucai/superwechat/SuperWeChatHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cn/ucai/superwechat/SuperWeChatModel.java" afterPath="$PROJECT_DIR$/src/cn/ucai/superwechat/SuperWeChatModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cn/ucai/superwechat/db/SuperWeChatManager.java" afterPath="$PROJECT_DIR$/src/cn/ucai/superwechat/db/SuperWeChatManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cn/ucai/superwechat/db/UserDao.java" afterPath="$PROJECT_DIR$/src/cn/ucai/superwechat/db/UserDao.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cn/ucai/superwechat/ui/UserProfileActivity.java" afterPath="$PROJECT_DIR$/src/cn/ucai/superwechat/ui/UserProfileActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../easeui/EaseUI.iml" afterPath="$PROJECT_DIR$/../easeui/EaseUI.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../easeui/src/com/hyphenate/easeui/controller/EaseUI.java" afterPath="$PROJECT_DIR$/../easeui/src/com/hyphenate/easeui/controller/EaseUI.java" />
@@ -3360,7 +3355,13 @@
       <option name="project" value="LOCAL" />
       <updated>1478076835130</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="添加保存单个用户信息，好友列表到数据库中，获取好友列表的方法">
+      <created>1478152000323</created>
+      <option name="number" value="00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1478152000323</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -3426,7 +3427,8 @@
     <MESSAGE value="在数据库三件套中添加存取更新用户信息的方法，并在登录成功后将用户信息保存到数据库中" />
     <MESSAGE value="登陆成功后将用户信息保存在内存中" />
     <MESSAGE value="在闪屏界面中判断是否登录过，若是，则从数据库中拿到上次登录的用户信息，并保存在内存中" />
-    <option name="LAST_COMMIT_MESSAGE" value="在闪屏界面中判断是否登录过，若是，则从数据库中拿到上次登录的用户信息，并保存在内存中" />
+    <MESSAGE value="添加保存单个用户信息，好友列表到数据库中，获取好友列表的方法" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加保存单个用户信息，好友列表到数据库中，获取好友列表的方法" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
