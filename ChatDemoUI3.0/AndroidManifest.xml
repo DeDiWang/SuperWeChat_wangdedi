@@ -137,6 +137,11 @@
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="adjustPan" />
         <activity
+            android:name=".ui.SettingsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
             android:name=".ui.PickAtUserActivity"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide" />

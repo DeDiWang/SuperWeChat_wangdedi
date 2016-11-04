@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.easemob.redpacketui.utils.RedPacketUtil;
-import com.hyphenate.easeui.domain.EaseUser;
 import com.hyphenate.easeui.utils.EaseUserUtils;
 
 import butterknife.BindView;
@@ -17,6 +16,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.ucai.superwechat.Constant;
 import cn.ucai.superwechat.R;
+import cn.ucai.superwechat.utils.MFGT;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -69,7 +69,7 @@ public class ProfileFragment extends Fragment {
             case R.id.tvExpression:
                 break;
             case R.id.tvSetting:
-
+                MFGT.gotoSettingActivity(getActivity());
                 break;
         }
     }

@@ -19,12 +19,15 @@ import android.os.Bundle;
 import com.hyphenate.easeui.ui.EaseBaseActivity;
 import com.umeng.analytics.MobclickAgent;
 
+import cn.ucai.superwechat.utils.ExitActivityUtils;
+
 @SuppressLint("Registered")
 public class BaseActivity extends EaseBaseActivity {
 
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
+        ExitActivityUtils.getInstance().addActivity(this);
     }
 
     @Override

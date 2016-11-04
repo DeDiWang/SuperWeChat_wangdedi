@@ -15,7 +15,7 @@ public class ExitActivityUtils {
 
     private ExitActivityUtils(){}
 
-    private ExitActivityUtils getInstance(){
+    public static  ExitActivityUtils getInstance(){
         return instance;
     }
 

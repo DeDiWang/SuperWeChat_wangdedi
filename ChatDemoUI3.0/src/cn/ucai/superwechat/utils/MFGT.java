@@ -9,6 +9,7 @@ import cn.ucai.superwechat.ui.GuideActivity;
 import cn.ucai.superwechat.ui.LoginActivity;
 import cn.ucai.superwechat.ui.MainActivity;
 import cn.ucai.superwechat.ui.RegisterActivity;
+import cn.ucai.superwechat.ui.SettingsActivity;
 
 public class MFGT {
     public static void finish(Activity activity){
@@ -40,5 +41,9 @@ public class MFGT {
 
     public static void gotoGuideActivity(Activity context) {
         startActivity(context, GuideActivity.class);
+    }
+
+    public static void gotoSettingActivity(Activity context) {
+        startActivity(context, SettingsActivity.class);
     }
 }
