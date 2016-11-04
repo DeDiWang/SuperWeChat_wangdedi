@@ -55,9 +55,12 @@ public class ProfileFragment extends Fragment {
         EaseUserUtils.setCurrentAppUserNameWithNo(tvUserName);
     }
 
-    @OnClick({R.id.tvPhotos, R.id.tvCollect, R.id.tvMoney, R.id.tvExpression, R.id.tvSetting})
+    @OnClick({R.id.tvPhotos, R.id.tvCollect, R.id.tvMoney, R.id.tvExpression, R.id.tvSetting ,R.id.layout_profile})
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.layout_profile:
+                MFGT.gotoUserProfileActivity(getActivity());
+                break;
             case R.id.tvPhotos:
                 break;
             case R.id.tvCollect:

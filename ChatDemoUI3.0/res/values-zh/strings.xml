@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="message">消息</string>
+    <string name="user_name_cannot_be_modify">用户名不能被修改</string>
 </resources>

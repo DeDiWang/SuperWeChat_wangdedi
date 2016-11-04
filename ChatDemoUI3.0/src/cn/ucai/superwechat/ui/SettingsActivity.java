@@ -361,7 +361,6 @@ public class SettingsActivity extends BaseActivity implements OnClickListener {
 		pd.setCanceledOnTouchOutside(false);
 		pd.show();
 		SuperWeChatHelper.getInstance().logout(false,new EMCallBack() {
-			
 			@Override
 			public void onSuccess() {
 				runOnUiThread(new Runnable() {

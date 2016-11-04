@@ -119,4 +119,9 @@ public class EaseUserUtils {
     private static void setAppUserName(String suffix, String userName, TextView tvUserName) {
         tvUserName.setText(suffix+userName);
     }
+
+    public static void setCurrentAppUserName(TextView tvUserName) {
+        String username = EMClient.getInstance().getCurrentUser();
+        tvUserName.setText(username);
+    }
 }

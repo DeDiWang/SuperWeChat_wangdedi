@@ -10,15 +10,11 @@ import java.util.List;
  */
 public class ExitActivityUtils {
     private List<Activity> activityList = new LinkedList<>();
-
     private static ExitActivityUtils instance = new ExitActivityUtils();
-
     private ExitActivityUtils(){}
-
     public static  ExitActivityUtils getInstance(){
         return instance;
     }
-
     public void addActivity(Activity activity){
         activityList.add(activity);
     }
