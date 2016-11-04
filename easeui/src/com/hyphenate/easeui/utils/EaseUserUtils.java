@@ -1,5 +1,6 @@
 package com.hyphenate.easeui.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -77,7 +78,6 @@ public class EaseUserUtils {
     public static void setAppUserNick(String username,TextView textView){
         if(textView != null){
             User user = getAppUserInfo(username);
-            Log.e("user==================",user.toString());
             if(user != null && user.getMUserNick() != null){
                 textView.setText(user.getMUserNick());
             }else{
@@ -93,6 +93,7 @@ public class EaseUserUtils {
                 Glide.with(context).load(avatarResId).into(imageView);
             } catch (Exception e) {
                 //use default avatar
+                Log.e("user.getAvatar()=====",user.getAvatar());
                 Glide.with(context).load(user.getAvatar()).diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.drawable.ease_default_avatar).into(imageView);
             }
         }else{
@@ -100,7 +101,7 @@ public class EaseUserUtils {
         }
     }
 
-    public static void setCurrentAppUserAvatar(FragmentActivity activity, ImageView ivAvatar) {
+    public static void setCurrentAppUserAvatar(Activity activity, ImageView ivAvatar) {
         String userName = EMClient.getInstance().getCurrentUser();
         setAppUserAvatar(activity,userName,ivAvatar);
     }

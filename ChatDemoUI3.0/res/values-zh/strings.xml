@@ -2,4 +2,5 @@
 <resources>
     <string name="message">消息</string>
     <string name="user_name_cannot_be_modify">用户名不能被修改</string>
+    <string name="nick_not_modify">昵称未修改</string>
 </resources>
