@@ -1,12 +1,14 @@
 package com.hyphenate.easeui.utils;
 
 import android.content.Context;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.hyphenate.chat.EMClient;
 import com.hyphenate.easeui.R;
 import com.hyphenate.easeui.controller.EaseUI;
 import com.hyphenate.easeui.controller.EaseUI.EaseUserProfileProvider;
@@ -96,5 +98,25 @@ public class EaseUserUtils {
         }else{
             Glide.with(context).load(R.drawable.ease_default_avatar).into(imageView);
         }
+    }
+
+    public static void setCurrentAppUserAvatar(FragmentActivity activity, ImageView ivAvatar) {
+        String userName = EMClient.getInstance().getCurrentUser();
+        setAppUserAvatar(activity,userName,ivAvatar);
+    }
+
+
+    public static void setCurrentAppUserNick(TextView tvNick) {
+        String userName = EMClient.getInstance().getCurrentUser();
+        setAppUserNick(userName,tvNick);
+    }
+
+    public static void setCurrentAppUserNameWithNo(TextView tvUserName) {
+        String userName = EMClient.getInstance().getCurrentUser();
+        setAppUserName("微信号：",userName,tvUserName);
+    }
+
+    private static void setAppUserName(String suffix, String userName, TextView tvUserName) {
+        tvUserName.setText(suffix+userName);
     }
 }

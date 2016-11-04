@@ -189,7 +189,7 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
         adapter.addFragment(new ConversationListFragment(),getString(R.string.app_name));
         adapter.addFragment(new ContactListFragment(),getString(R.string.contacts));
         adapter.addFragment(new DicoverFragment(),getString(R.string.discover));
-        adapter.addFragment(new SettingsFragment(),getString(R.string.me));
+        adapter.addFragment(new ProfileFragment(),getString(R.string.me));
         adapter.notifyDataSetChanged();
         tabHost.setChecked(0);
 
@@ -306,7 +306,6 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
     @Override
     public void onCheckedChange(int checkedPosition, boolean byUser) {
         mfViewPager.setCurrentItem(checkedPosition,false);
-        CommonUtils.showShortToast(""+checkedPosition);
     }
 
     @Override
@@ -317,7 +316,6 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
     @Override
     public void onPageSelected(int position) {
         mfViewPager.setCurrentItem(position);
-        CommonUtils.showShortToast("page==="+position);
         tabHost.setChecked(position);
     }
 
