@@ -236,6 +236,8 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
             public void onSuccess(String s) {
                 if(s!=null){
                     Result result = ResultUtils.getResultFromJson(s, User.class);
+                    User user= (User) result.getRetData();
+                    SuperWeChatHelper.getInstance().saveAppContact(user);
                     if(result!=null && result.isRetMsg()){
                         setPicToView(data);
                     }else{

@@ -89,11 +89,11 @@ public class EaseUserUtils {
         User user = getAppUserInfo(username);
         if(user != null && user.getAvatar() != null){
             try {
+                Log.e("user.getAvatar()=====",user.getAvatar());
                 int avatarResId = Integer.parseInt(user.getAvatar());
                 Glide.with(context).load(avatarResId).into(imageView);
             } catch (Exception e) {
                 //use default avatar
-                Log.e("user.getAvatar()=====",user.getAvatar());
                 Glide.with(context).load(user.getAvatar()).diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.drawable.ease_default_avatar).into(imageView);
             }
         }else{
