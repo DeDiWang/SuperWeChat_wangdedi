@@ -9,14 +9,13 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,7 +30,6 @@ import com.hyphenate.easeui.utils.EaseUserUtils;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
 import butterknife.BindView;
@@ -64,9 +62,14 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
     TextView tvUserName;
     @BindView(R.id.ivCode)
     ImageView ivCode;
+    @BindView(R.id.layout_nick)
+    LinearLayout layoutNick;
+    @BindView(R.id.layout_username)
+    LinearLayout layoutUsername;
 
     private ProgressDialog dialog;
     User user;
+
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
@@ -81,7 +84,7 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
         ivBack.setVisibility(View.VISIBLE);
         tvTitle.setVisibility(View.VISIBLE);
         tvTitle.setText(getString(R.string.title_user_profile));
-        EaseUserUtils.setCurrentAppUserAvatar(this,ivAvatar);
+        EaseUserUtils.setCurrentAppUserAvatar(this, ivAvatar);
         EaseUserUtils.setCurrentAppUserNick(tvNick);
         EaseUserUtils.setCurrentAppUserName(tvUserName);
     }
@@ -172,25 +175,27 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
             }
         }).start();
     }
+
     //更新自己服务器用户昵称
     private void updateAppUserNick(String nickName) {
         NetDao.updateNick(this, user.getMUserName(), nickName, new OkHttpUtils.OnCompleteListener<String>() {
             @Override
             public void onSuccess(String s) {
-                if(s!=null){
+                if (s != null) {
                     Result result = ResultUtils.getResultFromJson(s, User.class);
-                    if(result!=null && result.isRetMsg()){
+                    if (result != null && result.isRetMsg()) {
                         User u = (User) result.getRetData();
                         updateLocalUser(u);
-                    }else{
+                    } else {
                         CommonUtils.showShortToast(getString(R.string.toast_updatenick_fail));
                         dialog.dismiss();
                     }
-                }else{
+                } else {
                     CommonUtils.showShortToast(getString(R.string.toast_updatenick_fail));
                     dialog.dismiss();
                 }
             }
+
             @Override
             public void onError(String error) {
                 CommonUtils.showShortToast(getString(R.string.toast_updatenick_fail));
@@ -198,6 +203,7 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
             }
         });
     }
+
     //更新本地用户信息
     private void updateLocalUser(User u) {
         //更新本地数据库中用户信息
@@ -226,6 +232,7 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
+
     //更新本地数据库中用户头像
     private void updateAppUserAvatar(final Intent data) {
         dialog = ProgressDialog.show(this, getString(R.string.dl_update_photo), getString(R.string.dl_waiting));
@@ -234,17 +241,17 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
         NetDao.updateAvatar(this, user.getMUserName(), file, new OkHttpUtils.OnCompleteListener<String>() {
             @Override
             public void onSuccess(String s) {
-                if(s!=null){
+                if (s != null) {
                     Result result = ResultUtils.getResultFromJson(s, User.class);
-                    User user= (User) result.getRetData();
+                    User user = (User) result.getRetData();
                     SuperWeChatHelper.getInstance().saveAppContact(user);
-                    if(result!=null && result.isRetMsg()){
+                    if (result != null && result.isRetMsg()) {
                         setPicToView(data);
-                    }else{
+                    } else {
                         dialog.dismiss();
                         CommonUtils.showShortToast(getString(R.string.toast_updatephoto_fail));
                     }
-                }else{
+                } else {
                     dialog.dismiss();
                     CommonUtils.showShortToast(getString(R.string.toast_updatephoto_fail));
                 }
@@ -253,7 +260,7 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
             @Override
             public void onError(String error) {
                 dialog.dismiss();
-                L.e(TAG,"error=="+error);
+                L.e(TAG, "error==" + error);
                 CommonUtils.showShortToast(getString(R.string.toast_updatephoto_fail));
             }
         });
@@ -283,7 +290,13 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
             Bitmap photo = extras.getParcelable("data");
             Drawable drawable = new BitmapDrawable(getResources(), photo);
             ivAvatar.setImageDrawable(drawable);
-            uploadUserAvatar(Bitmap2Bytes(photo));
+            //uploadUserAvatar(Bitmap2Bytes(photo));
+            dialog.dismiss();
+            Toast.makeText(UserProfileActivity.this, getString(R.string.toast_updatephoto_success),
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(UserProfileActivity.this, getString(R.string.toast_updatephoto_fail),
+                    Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -320,7 +333,7 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
         return baos.toByteArray();
     }
 
-    @OnClick({R.id.iv_back, R.id.ivAvatar, R.id.tvNick, R.id.tvUserName})
+    @OnClick({R.id.iv_back, R.id.ivAvatar, R.id.layout_nick, R.id.layout_username})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -329,7 +342,7 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
             case R.id.ivAvatar:
                 uploadHeadPhoto();
                 break;
-            case R.id.tvNick:
+            case R.id.layout_nick:
                 final EditText editText = new EditText(this);
                 editText.setText(user.getMUserNick());
                 new Builder(this).setTitle(R.string.setting_nickname).setIcon(android.R.drawable.ic_dialog_info).setView(editText)
@@ -342,7 +355,7 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
                                     Toast.makeText(UserProfileActivity.this, getString(R.string.toast_nick_not_isnull), Toast.LENGTH_SHORT).show();
                                     return;
                                 }
-                                if(newNick.equals(user.getMUserNick())){
+                                if (newNick.equals(user.getMUserNick())) {
                                     CommonUtils.showShortToast(getString(R.string.nick_not_modify));
                                     editText.requestFocus();
                                     return;
@@ -351,7 +364,7 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
                             }
                         }).setNegativeButton(R.string.dl_cancel, null).show();
                 break;
-            case R.id.tvUserName:
+            case R.id.layout_username:
                 CommonUtils.showShortToast(getString(R.string.user_name_cannot_be_modify));
                 break;
             case R.id.ivCode:
@@ -359,16 +372,17 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
                 break;
         }
     }
-    public File saveBitmapFile(Intent data){
+
+    public File saveBitmapFile(Intent data) {
         Bundle extras = data.getExtras();
-        if(extras!=null){
+        if (extras != null) {
             Bitmap bitmap = extras.getParcelable("data");
-            String imagePath = EaseImageUtils.getImagePath(user.getMUserName()+ I.AVATAR_SUFFIX_JPG);
+            String imagePath = EaseImageUtils.getImagePath(user.getMUserName() + I.AVATAR_SUFFIX_JPG);
             File file = new File(imagePath);
-            L.e(TAG,"file path=="+file.getAbsolutePath());
+            L.e(TAG, "file path==" + file.getAbsolutePath());
             try {
                 BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
-                bitmap.compress(Bitmap.CompressFormat.PNG,100,bos);
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, bos);
                 bos.flush();
                 bos.close();
             } catch (Exception e) {
