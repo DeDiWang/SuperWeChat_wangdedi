@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="cn.ucai.superwechat"
     android:versionCode="36"
-    android:versionName="3.1.4"
-    >
+    android:versionName="3.1.4">
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -53,11 +52,10 @@
         android:name=".SuperWeChatApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:theme="@style/AppTheme"
         android:label="超级微信"
-        >
+        android:theme="@style/AppTheme">
         <activity
-            android:name="cn.ucai.superwechat.ui.MainActivity"
+            android:name=".ui.MainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
@@ -65,7 +63,7 @@
 
         <!-- 开屏页 -->
         <activity
-            android:name="cn.ucai.superwechat.ui.SplashActivitys"
+            android:name=".ui.SplashActivitys"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
             <intent-filter>
@@ -479,9 +477,12 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="3ecea51f560650b1ed8a4b99808f52e8" />
 
-        <activity android:name=".ui.GuideActivity"
+        <activity
+            android:name=".ui.GuideActivity"
             android:launchMode="singleTask"
             android:theme="@style/horizontal_slide" />
+        <activity android:name=".ui.NewFriendActivity" />
+        <activity android:name=".ui.FriendConfirmActivity"></activity>
     </application>
 
 </manifest>

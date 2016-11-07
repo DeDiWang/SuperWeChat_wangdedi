@@ -30,12 +30,16 @@
         android:visibility="gone"
         android:textColor="@color/white"
         android:gravity="center"/>
-    <Button
+    <TextView
+        android:id="@+id/tvFind"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_alignParentRight="true"
         android:background="@null"
-        android:text="添加朋友"
+        android:text="查找"
+        android:textSize="18dp"
+        android:paddingRight="10dp"
+        android:gravity="center"
         android:visibility="gone"
         android:textColor="@color/white"/>
     <ImageView

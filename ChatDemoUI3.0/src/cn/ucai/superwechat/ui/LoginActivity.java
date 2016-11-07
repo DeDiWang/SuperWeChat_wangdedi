@@ -246,7 +246,6 @@ public class LoginActivity extends BaseActivity {
                 break;
             case R.id.btnRegister:
                 MFGT.gotoRegisterActivity(this);
-                MFGT.finish(this);
                 break;
         }
     }
