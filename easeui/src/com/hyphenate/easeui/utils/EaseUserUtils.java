@@ -81,7 +81,7 @@ public class EaseUserUtils {
             if(user != null && user.getMUserNick() != null){
                 textView.setText(user.getMUserNick());
             }else{
-                textView.setText("昵称");
+                textView.setText(username);
             }
         }
     }
@@ -124,5 +124,15 @@ public class EaseUserUtils {
     public static void setCurrentAppUserName(TextView tvUserName) {
         String username = EMClient.getInstance().getCurrentUser();
         tvUserName.setText(username);
+    }
+
+    public static void setAppUserNameWithNo(String mUserName, TextView tvNewFriendUserName) {
+        tvNewFriendUserName.setText("微信号："+mUserName);
+    }
+
+    public static User getCurrentUserInfo() {
+        String username = EMClient.getInstance().getCurrentUser();
+        User user = getAppUserInfo(username);
+        return user;
     }
 }
