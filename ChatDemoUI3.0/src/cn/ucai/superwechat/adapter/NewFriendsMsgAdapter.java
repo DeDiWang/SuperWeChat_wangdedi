@@ -16,9 +16,16 @@ package cn.ucai.superwechat.adapter;
 import java.util.List;
 
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.easeui.domain.User;
+import com.hyphenate.easeui.utils.EaseUserUtils;
+
 import cn.ucai.superwechat.R;
+import cn.ucai.superwechat.bean.Result;
+import cn.ucai.superwechat.data.OkHttpUtils;
 import cn.ucai.superwechat.db.InviteMessgeDao;
 import cn.ucai.superwechat.domain.InviteMessage;
+import cn.ucai.superwechat.net.NetDao;
+import cn.ucai.superwechat.utils.ResultUtils;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -80,8 +87,28 @@ public class NewFriendsMsgAdapter extends ArrayAdapter<InviteMessage> {
 		
 		final InviteMessage msg = getItem(position);
 		if (msg != null) {
-		    
-		    holder.agree.setVisibility(View.INVISIBLE);
+			NetDao.findContact((Activity) context, msg.getFrom(), new OkHttpUtils.OnCompleteListener<String>() {
+				@Override
+				public void onSuccess(String s) {
+					if(s!=null){
+						Result result = ResultUtils.getResultFromJson(s, User.class);
+						if(result!=null && result.isRetMsg()){
+							User user = (User) result.getRetData();
+							if(user!=null){
+								EaseUserUtils.setAppUserAvatar(context,msg.getFrom(),holder.avator);
+								EaseUserUtils.setAppUserNick(msg.getFrom(),holder.name);
+							}
+						}
+					}
+				}
+
+				@Override
+				public void onError(String error) {
+
+				}
+			});
+
+			holder.agree.setVisibility(View.INVISIBLE);
 		    
 			if(msg.getGroupId() != null){ // show group name
 				holder.groupContainer.setVisibility(View.VISIBLE);
@@ -162,12 +189,6 @@ public class NewFriendsMsgAdapter extends ArrayAdapter<InviteMessage> {
 		return convertView;
 	}
 
-	/**
-	 * accept invitation
-	 * 
-	 * @param button
-	 * @param username
-	 */
 	private void acceptInvitation(final Button buttonAgree, final Button buttonRefuse, final InviteMessage msg) {
 		final ProgressDialog pd = new ProgressDialog(context);
 		String str1 = context.getResources().getString(R.string.Are_agree_with);
@@ -219,13 +240,7 @@ public class NewFriendsMsgAdapter extends ArrayAdapter<InviteMessage> {
 			}
 		}).start();
 	}
-	
-	/**
-     * decline invitation
-     * 
-     * @param button
-     * @param username
-     */
+
     private void refuseInvitation(final Button buttonAgree, final Button buttonRefuse, final InviteMessage msg) {
         final ProgressDialog pd = new ProgressDialog(context);
         String str1 = context.getResources().getString(R.string.Are_refuse_with);

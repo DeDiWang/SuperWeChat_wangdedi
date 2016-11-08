@@ -4,27 +4,9 @@
     android:layout_height="match_parent"
     android:background="#f2f2f2"
     android:orientation="vertical" >
-
-    <RelativeLayout
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/height_top_bar"
-        android:background="@color/top_bar_normal_bg"
-        android:gravity="center_vertical" >
-
-        <include layout="@layout/ease_commom_back_btn" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/Application_and_notify"
-            android:textColor="#fff"
-            android:textSize="18sp" />
-    </RelativeLayout>
-
+    <include layout="@layout/layout_title"/>
     <ListView
-        android:id="@+id/list"
+        android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/transparent"
