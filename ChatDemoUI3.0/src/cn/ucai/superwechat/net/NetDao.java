@@ -69,11 +69,21 @@ public class NetDao {
                 .post()
                 .execute(listener);
     }
-
+    //查找联系人
     public static void findContact(Activity context,String userName,OkHttpUtils.OnCompleteListener<String> listener){
         OkHttpUtils<String> utils = new OkHttpUtils<>(context);
         utils.setRequestUrl(I.REQUEST_FIND_USER)
                 .addParam(I.User.USER_NAME,userName)
+                .targetClass(String.class)
+                .execute(listener);
+    }
+
+    //添加好友
+    public static void addContact(Context context,String userName,String cUserName,OkHttpUtils.OnCompleteListener<String> listener){
+        OkHttpUtils<String> utils = new OkHttpUtils<>(context);
+        utils.setRequestUrl(I.REQUEST_ADD_CONTACT)
+                .addParam(I.Contact.USER_NAME,userName)
+                .addParam(I.Contact.CU_NAME,cUserName)
                 .targetClass(String.class)
                 .execute(listener);
     }
