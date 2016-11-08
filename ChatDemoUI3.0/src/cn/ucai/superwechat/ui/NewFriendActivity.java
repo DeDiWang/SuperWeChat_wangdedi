@@ -1,5 +1,6 @@
 package cn.ucai.superwechat.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -83,6 +84,7 @@ public class NewFriendActivity extends AppCompatActivity {
                 MFGT.gotoFriendConfrimActivity(this,user.getMUserName());
                 break;
             case R.id.btnSendMessage:
+                MFGT.gotoChatActivity(this,user.getMUserName());
                 break;
             case R.id.btnVideoChat:
                 break;
