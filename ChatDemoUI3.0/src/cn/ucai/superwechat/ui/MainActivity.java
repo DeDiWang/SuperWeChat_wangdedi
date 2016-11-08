@@ -84,7 +84,7 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
     private boolean isCurrentAccountRemoved = false;
 
     MainTabAdpter adapter;
-
+    private ContactListFragment contactListFragment;
     /**
      * check if current user account was remove
      */
@@ -101,6 +101,7 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
         ButterKnife.bind(this);
         // runtime permission for android 6.0, just require all permissions here for simple
         requestPermissions();
+        contactListFragment = new ContactListFragment();
         initView();
         umeng();
         checkAccount();
@@ -193,7 +194,7 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
         mfViewPager.setOffscreenPageLimit(4);
         adapter.clear();
         adapter.addFragment(new ConversationListFragment(), getString(R.string.app_name));
-        adapter.addFragment(new ContactListFragment(), getString(R.string.contacts));
+        adapter.addFragment(contactListFragment, getString(R.string.contacts));
         adapter.addFragment(new DicoverFragment(), getString(R.string.discover));
         adapter.addFragment(new ProfileFragment(), getString(R.string.me));
         adapter.notifyDataSetChanged();
@@ -435,14 +436,13 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
         runOnUiThread(new Runnable() {
             public void run() {
                 int count = getUnreadAddressCountTotal();
-				/*if (count > 0) {
-					unreadAddressLable.setVisibility(View.VISIBLE);
+				if (count > 0) {
+					tabHost.setHasNew(1,true);
 				} else {
-					unreadAddressLable.setVisibility(View.INVISIBLE);
-				}*/
+					tabHost.setHasNew(1,false);
+				}
             }
         });
-
     }
 
     /**
