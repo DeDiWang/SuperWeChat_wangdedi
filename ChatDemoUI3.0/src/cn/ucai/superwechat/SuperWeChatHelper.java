@@ -658,6 +658,9 @@ public class SuperWeChatHelper {
             userDao.deleteContact(username);
             inviteMessgeDao.deleteMessage(username);
 
+            //收到被删除的消息后将内存和数据库中好友信息删除
+            SuperWeChatHelper.getInstance().delAppContact(username);
+
             broadcastManager.sendBroadcast(new Intent(Constant.ACTION_CONTACT_CHANAGED));
         }
 
@@ -1351,5 +1354,10 @@ public class SuperWeChatHelper {
         ArrayList<User> mList = new ArrayList<User>();
         mList.addAll(appContactList.values());
         demoModel.saveAppContactList(mList);
+    }
+
+    public void delAppContact(String username){
+        appContactList.remove(username);
+        demoModel.delAppContact(username);
     }
 }

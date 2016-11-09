@@ -294,4 +294,9 @@ public class SuperWeChatModel {
         DisabledGroups,
         DisabledIds
     }
+
+    public void delAppContact(String username){
+        UserDao dao = new UserDao(context);
+        dao.deleteAppContact(username);
+    }
 }

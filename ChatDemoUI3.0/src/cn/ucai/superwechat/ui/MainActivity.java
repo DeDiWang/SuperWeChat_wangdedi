@@ -66,11 +66,13 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
     private TextView unreadAddressLable;
 
     private Button[] mTabs;
-    private ContactListFragment contactListFragment;
+
     private Fragment[] fragments;
     private int index;
-    private int currentTabIndex;
+
     // user logged into another device*/
+
+    private int currentTabIndex;
     public boolean isConflict = false;
     @BindView(R.id.tvLeft)
     TextView tvLeft;
@@ -102,6 +104,7 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
         // runtime permission for android 6.0, just require all permissions here for simple
         requestPermissions();
         contactListFragment = new ContactListFragment();
+        conversationListFragment = new ConversationListFragment();
         initView();
         umeng();
         checkAccount();
@@ -193,7 +196,7 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
         mfViewPager.setAdapter(adapter);
         mfViewPager.setOffscreenPageLimit(4);
         adapter.clear();
-        adapter.addFragment(new ConversationListFragment(), getString(R.string.app_name));
+        adapter.addFragment(conversationListFragment, getString(R.string.app_name));
         adapter.addFragment(contactListFragment, getString(R.string.contacts));
         adapter.addFragment(new DicoverFragment(), getString(R.string.discover));
         adapter.addFragment(new ProfileFragment(), getString(R.string.me));
@@ -281,12 +284,12 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
             public void run() {
                 // refresh unread count
                 updateUnreadLabel();
-				/*if (currentTabIndex == 0) {
+				if (currentTabIndex == 0) {
 					// refresh conversation list
 					if (conversationListFragment != null) {
 						conversationListFragment.refresh();
 					}
-				}*/
+				}
             }
         });
     }
@@ -308,16 +311,16 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
             public void onReceive(Context context, Intent intent) {
                 updateUnreadLabel();
                 updateUnreadAddressLable();
-                /*if (currentTabIndex == 0) {
+                //if (currentTabIndex == 0) {
                     // refresh conversation list
                     if (conversationListFragment != null) {
                         conversationListFragment.refresh();
                     }
-                } else if (currentTabIndex == 1) {
+                //} else if (currentTabIndex == 1) {
                     if(contactListFragment != null) {
                         contactListFragment.refresh();
                     }
-                }*/
+                //}
                 String action = intent.getAction();
                 if (action.equals(Constant.ACTION_GROUP_CHANAGED)) {
                     if (EaseCommonUtils.getTopActivity(MainActivity.this).equals(GroupsActivity.class.getName())) {
