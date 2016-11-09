@@ -99,10 +99,10 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        savePower();
-        checkLogined(savedInstanceState);
         setContentView(R.layout.em_activity_main);
         ButterKnife.bind(this);
+        savePower();
+        checkLogined(savedInstanceState);
         // runtime permission for android 6.0, just require all permissions here for simple
         requestPermissions();
         contactListFragment = new ContactListFragment();
@@ -426,6 +426,7 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
      */
     public void updateUnreadLabel() {
         int count = getUnreadMsgCountTotal();
+        tabHost.setUnreadCount(0,count);
 		/*if (count > 0) {
 			unreadLabel.setText(String.valueOf(count));
 			unreadLabel.setVisibility(View.VISIBLE);

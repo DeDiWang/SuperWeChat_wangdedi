@@ -169,44 +169,6 @@ public class EaseContactListFragment extends EaseBaseFragment {
         }
     }
 
-
-    /**
-     * move user to blacklist
-     */
-    protected void moveToBlacklist(final String username){
-        final ProgressDialog pd = new ProgressDialog(getActivity());
-        String st1 = getResources().getString(R.string.Is_moved_into_blacklist);
-        final String st2 = getResources().getString(R.string.Move_into_blacklist_success);
-        final String st3 = getResources().getString(R.string.Move_into_blacklist_failure);
-        pd.setMessage(st1);
-        pd.setCanceledOnTouchOutside(false);
-        pd.show();
-        new Thread(new Runnable() {
-            public void run() {
-                try {
-                    //move to blacklist
-                    EMClient.getInstance().contactManager().addUserToBlackList(username,false);
-                    getActivity().runOnUiThread(new Runnable() {
-                        public void run() {
-                            pd.dismiss();
-                            Toast.makeText(getActivity(), st2, Toast.LENGTH_SHORT).show();
-                            refresh();
-                        }
-                    });
-                } catch (HyphenateException e) {
-                    e.printStackTrace();
-                    getActivity().runOnUiThread(new Runnable() {
-                        public void run() {
-                            pd.dismiss();
-                            Toast.makeText(getActivity(), st3, Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-            }
-        }).start();
-        
-    }
-    
     // refresh ui
     public void refresh() {
         getContactList();
