@@ -24,6 +24,7 @@ import cn.ucai.superwechat.bean.Result;
 import cn.ucai.superwechat.data.OkHttpUtils;
 import cn.ucai.superwechat.net.NetDao;
 import cn.ucai.superwechat.utils.CommonUtils;
+import cn.ucai.superwechat.utils.L;
 import cn.ucai.superwechat.utils.MFGT;
 import cn.ucai.superwechat.utils.ResultUtils;
 
@@ -82,21 +83,21 @@ public class AddContactActivity extends BaseActivity {
                     Result result = ResultUtils.getResultFromJson(s, User.class);
                     if(result!=null && result.isRetMsg()){
                         User user = (User) result.getRetData();
-                        if(user!=null){
-                            MFGT.gotoNewFriendActivity(AddContactActivity.this,user);
+                        if(user!=null) {
+                            MFGT.gotoNewFriendActivity(AddContactActivity.this, user);
                         }
                     }else{
-                        CommonUtils.showMsgShortToast(R.string.msg_104);
+                        CommonUtils.showShortToast(getResources().getString(R.string.no_such_user));
                     }
                 }else{
-                    CommonUtils.showMsgShortToast(R.string.msg_104);
+                    CommonUtils.showShortToast(getResources().getString(R.string.no_such_user));
                 }
             }
 
             @Override
             public void onError(String error) {
                 progressDialog.dismiss();
-                CommonUtils.showMsgShortToast(R.string.msg_104);
+                CommonUtils.showShortToast(getResources().getString(R.string.no_such_user));
             }
         });
     }
