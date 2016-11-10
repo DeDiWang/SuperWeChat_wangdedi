@@ -7,4 +7,6 @@
     <string name="confirm_message">消息验证</string>
     <string name="send">发送</string>
     <string name="no_such_user">查无此人</string>
+    <string name="create_group_success">创建群聊成功</string>
+    <string name="create_group_fail">创建群聊失败</string>
 </resources>
