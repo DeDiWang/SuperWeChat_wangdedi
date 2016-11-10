@@ -167,6 +167,8 @@ public class EaseContactListFragment extends EaseBaseFragment {
         if (!hidden) {
             refresh();
         }
+        query.getText().clear();
+        hideSoftKeyboard();
     }
 
     // refresh ui
