@@ -22,6 +22,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,28 +30,32 @@ import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMGroupManager.EMGroupOptions;
 import com.hyphenate.chat.EMGroupManager.EMGroupStyle;
 import cn.ucai.superwechat.R;
+import cn.ucai.superwechat.utils.MFGT;
+
 import com.hyphenate.easeui.widget.EaseAlertDialog;
 import com.hyphenate.exceptions.HyphenateException;
 
 public class NewGroupActivity extends BaseActivity {
-	private EditText groupNameEditText;
-	private ProgressDialog progressDialog;
-	private EditText introductionEditText;
-	private CheckBox publibCheckBox;
-	private CheckBox memberCheckbox;
+	private EditText etGroupName;
+	private ProgressDialog dialog;
+	private EditText etIntro;
+	private CheckBox cbPublic;
+	private CheckBox cbMember;
 	private TextView secondTextView;
+	private ImageView ivGroupAvatar;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.em_activity_new_group);
-		groupNameEditText = (EditText) findViewById(R.id.edit_group_name);
-		introductionEditText = (EditText) findViewById(R.id.edit_group_introduction);
-		publibCheckBox = (CheckBox) findViewById(R.id.cb_public);
-		memberCheckbox = (CheckBox) findViewById(R.id.cb_member_inviter);
+		etGroupName = (EditText) findViewById(R.id.edit_group_name);
+		etIntro = (EditText) findViewById(R.id.edit_group_introduction);
+		cbPublic = (CheckBox) findViewById(R.id.cb_public);
+		cbMember = (CheckBox) findViewById(R.id.cb_member_inviter);
 		secondTextView = (TextView) findViewById(R.id.second_desc);
-		
-		publibCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+		ivGroupAvatar = (ImageView) findViewById(R.id.iv_group_avatar);
+
+		cbPublic.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
 		    @Override
 		    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -67,7 +72,7 @@ public class NewGroupActivity extends BaseActivity {
 	 * @param v
 	 */
 	public void save(View v) {
-		String name = groupNameEditText.getText().toString();
+		String name = etGroupName.getText().toString();
 		if (TextUtils.isEmpty(name)) {
 		    new EaseAlertDialog(this, R.string.Group_name_cannot_be_empty).show();
 		} else {
@@ -83,16 +88,16 @@ public class NewGroupActivity extends BaseActivity {
 		final String st2 = getResources().getString(R.string.Failed_to_create_groups);
 		if (resultCode == RESULT_OK) {
 			//new group
-			progressDialog = new ProgressDialog(this);
-			progressDialog.setMessage(st1);
-			progressDialog.setCanceledOnTouchOutside(false);
-			progressDialog.show();
+			dialog = new ProgressDialog(this);
+			dialog.setMessage(st1);
+			dialog.setCanceledOnTouchOutside(false);
+			dialog.show();
 
 			new Thread(new Runnable() {
 				@Override
 				public void run() {
-					final String groupName = groupNameEditText.getText().toString().trim();
-					String desc = introductionEditText.getText().toString();
+					final String groupName = etGroupName.getText().toString().trim();
+					String desc = etIntro.getText().toString();
 					String[] members = data.getStringArrayExtra("newmembers");
 					try {
 						EMGroupOptions option = new EMGroupOptions();
@@ -101,15 +106,18 @@ public class NewGroupActivity extends BaseActivity {
 					    String reason = NewGroupActivity.this.getString(R.string.invite_join_group);
 					    reason  = EMClient.getInstance().getCurrentUser() + reason + groupName;
 					    
-						if(publibCheckBox.isChecked()){
-						    option.style = memberCheckbox.isChecked() ? EMGroupStyle.EMGroupStylePublicJoinNeedApproval : EMGroupStyle.EMGroupStylePublicOpenJoin;
+						if(cbPublic.isChecked()){
+						    option.style = cbMember.isChecked() ? EMGroupStyle.EMGroupStylePublicJoinNeedApproval : EMGroupStyle.EMGroupStylePublicOpenJoin;
 						}else{
-						    option.style = memberCheckbox.isChecked()?EMGroupStyle.EMGroupStylePrivateMemberCanInvite:EMGroupStyle.EMGroupStylePrivateOnlyOwnerInvite;
+						    option.style = cbMember.isChecked()?EMGroupStyle.EMGroupStylePrivateMemberCanInvite:EMGroupStyle.EMGroupStylePrivateOnlyOwnerInvite;
 						}
                         EMClient.getInstance().groupManager().createGroup(groupName, desc, members, reason, option);
+
+						createAppGroup();
+
 						runOnUiThread(new Runnable() {
 							public void run() {
-								progressDialog.dismiss();
+								dialog.dismiss();
 								setResult(RESULT_OK);
 								finish();
 							}
@@ -117,7 +125,7 @@ public class NewGroupActivity extends BaseActivity {
 					} catch (final HyphenateException e) {
 						runOnUiThread(new Runnable() {
 							public void run() {
-								progressDialog.dismiss();
+								dialog.dismiss();
 								Toast.makeText(NewGroupActivity.this, st2 + e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
 							}
 						});
@@ -128,7 +136,11 @@ public class NewGroupActivity extends BaseActivity {
 		}
 	}
 
+	private void createAppGroup() {
+
+	}
+
 	public void back(View view) {
-		finish();
+		MFGT.finish(this);
 	}
 }

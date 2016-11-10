@@ -34,6 +34,8 @@ import com.hyphenate.chat.EMGroup;
 import cn.ucai.superwechat.Constant;
 import cn.ucai.superwechat.R;
 import cn.ucai.superwechat.adapter.GroupAdapter;
+import cn.ucai.superwechat.utils.MFGT;
+
 import com.hyphenate.exceptions.HyphenateException;
 
 import java.util.List;
@@ -164,6 +166,6 @@ public class GroupsActivity extends BaseActivity {
 	}
 
 	public void back(View view) {
-		finish();
+		MFGT.finish(this);
 	}
 }

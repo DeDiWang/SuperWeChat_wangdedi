@@ -6,4 +6,5 @@
     <string name="newFriendProfile">详细资料</string>
     <string name="confirm_message">消息验证</string>
     <string name="send">发送</string>
+    <string name="no_such_user">查无此人</string>
 </resources>
