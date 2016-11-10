@@ -41,6 +41,7 @@ import cn.ucai.superwechat.ui.ChatActivity;
 import cn.ucai.superwechat.ui.MainActivity;
 import cn.ucai.superwechat.ui.VideoCallActivity;
 import cn.ucai.superwechat.ui.VoiceCallActivity;
+import cn.ucai.superwechat.utils.CommonUtils;
 import cn.ucai.superwechat.utils.L;
 import cn.ucai.superwechat.utils.PreferenceManager;
 import cn.ucai.superwechat.utils.ResultUtils;
@@ -1113,7 +1114,38 @@ public class SuperWeChatHelper {
        }
        
        isSyncingContactsWithServer = true;
-       
+
+       //登录时从服务器下载所有好友信息列表
+       NetDao.downContactListAll(appContext, new OkHttpUtils.OnCompleteListener<String>() {
+           @Override
+           public void onSuccess(String s) {
+               if(s!=null){
+                   Result result = ResultUtils.getListResultFromJson(s, User.class);
+                   if(result!=null && result.isRetMsg()){
+                       List<User> list = (List<User>) result.getRetData();
+                       Map<String,User> map=new HashMap<>();
+                       for(User user:list){
+                           map.put(user.getMUserName(),user);
+                           EaseCommonUtils.setAppUserInitialLetter(user);
+                       }
+                       //将好友列表保存到内存中
+                       getAppContactList().clear();
+                       getAppContactList().putAll(map);
+                       //保存在数据库中
+                       UserDao userDao = new UserDao(appContext);
+                       ArrayList<User> userList=new ArrayList<>(map.values());
+                       userDao.saveAppContactList(userList);
+                       //发送广播好友列表信息改变
+                       broadcastManager.sendBroadcast(new Intent(Constant.ACTION_CONTACT_CHANAGED));
+                   }
+               }
+           }
+
+           @Override
+           public void onError(String error) {
+
+           }
+       });
        new Thread(){
            @Override
            public void run(){
