@@ -48,7 +48,7 @@
         <Button
             android:id="@+id/btnAddToContact"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:text="添加到通讯录"
@@ -64,7 +64,7 @@
             <Button
                 android:id="@+id/btnSendMessage"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:text="发消息"
@@ -73,7 +73,7 @@
             <Button
                 android:id="@+id/btnVideoChat"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:text="视频聊天"
