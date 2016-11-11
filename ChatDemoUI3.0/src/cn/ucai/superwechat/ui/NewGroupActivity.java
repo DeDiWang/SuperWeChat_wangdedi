@@ -71,6 +71,8 @@ public class NewGroupActivity extends BaseActivity {
 	private TextView secondTextView;
 	private ImageView ivGroupAvatar;
 	private File groupAvatarFile = null;
+	EMGroup emGroup;
+	String[] members;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -148,7 +150,7 @@ public class NewGroupActivity extends BaseActivity {
 				public void run() {
 					final String groupName = etGroupName.getText().toString().trim();
 					String desc = etIntro.getText().toString();
-					String[] members = data.getStringArrayExtra("newmembers");
+					members = data.getStringArrayExtra("newmembers");
 					try {
 						EMGroupOptions option = new EMGroupOptions();
 						option.maxUsers = 200;
@@ -161,9 +163,9 @@ public class NewGroupActivity extends BaseActivity {
 						}else{
 							option.style = cbMember.isChecked()?EMGroupStyle.EMGroupStylePrivateMemberCanInvite:EMGroupStyle.EMGroupStylePrivateOnlyOwnerInvite;
 						}
-						EMGroup emGroup = EMClient.getInstance().groupManager().createGroup(groupName, desc, members, reason, option);
+						emGroup = EMClient.getInstance().groupManager().createGroup(groupName, desc, members, reason, option);
 
-						createAppGroup(emGroup);
+						createAppGroup();
 
 					} catch (final HyphenateException e) {
 						runOnUiThread(new Runnable() {
@@ -179,45 +181,69 @@ public class NewGroupActivity extends BaseActivity {
 		}
 	}
 
-	private void createAppGroup(EMGroup emGroup) {
+	private void createAppGroup() {
 		if(groupAvatarFile == null){
-			NetDao.createGroup(this, emGroup, new OkHttpUtils.OnCompleteListener<String>() {
-				@Override
-				public void onSuccess(String s) {
-					createGroupSuccess(s);
-				}
-
-				@Override
-				public void onError(String error) {
-					L.e(TAG,"error==="+error);
-				}
-			});
+			NetDao.createGroup(this, emGroup, listener);
 		}else{
-			NetDao.createGroup(this, emGroup, groupAvatarFile, new OkHttpUtils.OnCompleteListener<String>() {
-				@Override
-				public void onSuccess(String s) {
-					createGroupSuccess(s);
-				}
-
-				@Override
-				public void onError(String error) {
-
-				}
-			});
+			NetDao.createGroup(this, emGroup, groupAvatarFile,listener);
 		}
 	}
 
-	private void createGroupSuccess(String s) {
-		L.e(TAG,"s=="+s);
-		if(s!=null){
-			Result result = ResultUtils.getResultFromJson(s, Group.class);
-			if(result!=null && result.isRetMsg()){
-				afterCreateGroupSuccess();
+	OkHttpUtils.OnCompleteListener<String> listener =new OkHttpUtils.OnCompleteListener<String>(){
+		@Override
+		public void onSuccess(String s) {
+			L.e(TAG,"s=="+s);
+			if(s!=null){
+				Result result = ResultUtils.getResultFromJson(s, Group.class);
+				if(result!=null && result.isRetMsg()){
+					if(emGroup!=null && emGroup.getMembers()!=null && emGroup.getMembers().size()>1){
+						addGroupMembers();
+					}else{
+						afterCreateGroupSuccess();
+					}
+				}else{
+					CommonUtils.showShortToast(getResources().getString(R.string.create_group_fail));
+					dialog.dismiss();
+				}
 			}else{
 				CommonUtils.showShortToast(getResources().getString(R.string.create_group_fail));
 				dialog.dismiss();
 			}
 		}
+
+		@Override
+		public void onError(String error) {
+			CommonUtils.showShortToast(getResources().getString(R.string.create_group_fail));
+			dialog.dismiss();
+		}
+	};
+
+	private void addGroupMembers() {
+		NetDao.addGroupMember(this, emGroup, new OkHttpUtils.OnCompleteListener<String>() {
+			@Override
+			public void onSuccess(String s) {
+				if(s!=null){
+					Result result = ResultUtils.getResultFromJson(s, Group.class);
+					L.e(TAG,"addGroupMembers,result=="+result);
+					if(result!=null &&result.isRetMsg()){
+						Group group = (Group) result.getRetData();
+						afterCreateGroupSuccess();
+					}else{
+						CommonUtils.showShortToast(getResources().getString(R.string.create_group_fail));
+						dialog.dismiss();
+					}
+				}else{
+					CommonUtils.showShortToast(getResources().getString(R.string.create_group_fail));
+					dialog.dismiss();
+				}
+			}
+
+			@Override
+			public void onError(String error) {
+				CommonUtils.showShortToast(getResources().getString(R.string.create_group_fail));
+				dialog.dismiss();
+			}
+		});
 	}
 
 	private void afterCreateGroupSuccess(){
