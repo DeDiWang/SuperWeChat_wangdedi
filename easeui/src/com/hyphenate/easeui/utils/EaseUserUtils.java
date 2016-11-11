@@ -14,6 +14,7 @@ import com.hyphenate.easeui.R;
 import com.hyphenate.easeui.controller.EaseUI;
 import com.hyphenate.easeui.controller.EaseUI.EaseUserProfileProvider;
 import com.hyphenate.easeui.domain.EaseUser;
+import com.hyphenate.easeui.domain.Group;
 import com.hyphenate.easeui.domain.User;
 
 public class EaseUserUtils {
@@ -147,6 +148,20 @@ public class EaseUserUtils {
             } catch (Exception e) {
                 //use default avatar
                 Glide.with(context).load(path).diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.drawable.ease_default_avatar).into(imageView);
+            }
+        }else{
+            Glide.with(context).load(R.drawable.ease_default_avatar).into(imageView);
+        }
+    }
+
+    public static void setAppGroupAvatar(Context context, String hxId, ImageView imageView){
+        if(hxId!=null){
+            try {
+                int avatarResId = Integer.parseInt(Group.getGroupAvatar(hxId));
+                Glide.with(context).load(avatarResId).into(imageView);
+            } catch (Exception e) {
+                //use default avatar
+                Glide.with(context).load(Group.getGroupAvatar(hxId)).diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.drawable.ease_default_avatar).into(imageView);
             }
         }else{
             Glide.with(context).load(R.drawable.ease_default_avatar).into(imageView);

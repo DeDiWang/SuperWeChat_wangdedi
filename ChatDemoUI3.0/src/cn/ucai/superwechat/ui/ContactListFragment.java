@@ -118,7 +118,7 @@ public class ContactListFragment extends EaseContactListFragment {
                     // demo中直接进入聊天页面，实际一般是进入用户详情页
                     User u = SuperWeChatHelper.getInstance().getAppContactList().get(username);
                     L.e(TAG,"u===="+u);
-                    MFGT.gotoNewFriendActivity(getActivity(),u);
+                    MFGT.gotoNewFriendActivity(getActivity(),u.getMUserName());
                 }
             }
         });
