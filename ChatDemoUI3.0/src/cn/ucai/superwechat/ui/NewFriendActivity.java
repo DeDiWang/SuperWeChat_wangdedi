@@ -83,15 +83,26 @@ public class NewFriendActivity extends AppCompatActivity {
                         user = (User) result.getRetData();
                         L.e(TAG,"findUserInfo user=="+user);
                         setUserInfo();
+                    }else{
+                        syncFail();
                     }
+                }else{
+                    syncFail();
                 }
             }
 
             @Override
             public void onError(String error) {
-
+                syncFail();
             }
         });
+    }
+
+    private void syncFail() {
+        if(!isFriend){
+            MFGT.finish(this);
+            return;
+        }
     }
 
     private void initView() {
